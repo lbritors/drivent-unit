@@ -66,6 +66,14 @@ async function updateBooking(bookingId: number, roomId: number) {
     },
   });
 }
+
+async function getRoom(roomId: number) {
+  return prisma.room.findFirst({
+    where: {
+      id: roomId,
+    },
+  });
+}
 const bookingRepository = {
   getBookingByUserId,
   createBooking,
@@ -73,6 +81,7 @@ const bookingRepository = {
   countCapacity,
   incrementRoomCapacity,
   updateBooking,
+  getRoom,
 };
 
 export default bookingRepository;

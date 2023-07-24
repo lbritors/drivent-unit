@@ -10,7 +10,8 @@ export async function getBookings(req: AuthenticatedRequest, res: Response) {
     const booking = await bookingService.getBookingByUserId(userId);
     return res.status(httpStatus.OK).send(booking);
   } catch (err) {
-    return res.sendStatus(httpStatus.NOT_FOUND);
+    if (err.name === 'NotFoundError') return res.sendStatus(httpStatus.NOT_FOUND);
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }
 
