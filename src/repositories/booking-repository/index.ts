@@ -45,17 +45,6 @@ async function incrementRoomCapacity(roomId: number) {
   });
 }
 
-async function countCapacity(roomId: number) {
-  return prisma.room.findFirst({
-    where: {
-      id: roomId,
-      capacity: {
-        gt: 0,
-      },
-    },
-  });
-}
-
 async function updateBooking(bookingId: number, roomId: number) {
   return prisma.booking.update({
     where: {
@@ -78,7 +67,6 @@ const bookingRepository = {
   getBookingByUserId,
   createBooking,
   decrementRoomCapacity,
-  countCapacity,
   incrementRoomCapacity,
   updateBooking,
   getRoom,
